@@ -8,7 +8,7 @@
     <title>Карта Orzu Medical</title>
     <style>
       #animationWrapper {
-        font-family: 'Times New Roman', Times, serif;
+        font-family: "Times New Roman", Times, serif;
       }
       .link-underline {
         text-decoration: underline;
@@ -17,13 +17,13 @@
   </head>
   <body
     class="flex items-center justify-center min-h-screen relative overflow-x-hidden"
-    style="background-color: #3f6f08;"
+    style="background-color: #3f6f08"
   >
     <!-- Анимация появления логотипа -->
     <div
       id="animationWrapper"
       class="fixed inset-0 flex flex-col justify-center items-center bg-white z-50"
-      style="font-family: 'Times New Roman', Times, serif;"
+      style="font-family: 'Times New Roman', Times, serif"
     >
       <div
         id="logoText"
@@ -31,7 +31,10 @@
       >
         Orzu Medical
       </div>
-      <div id="welcomeMessage" class="mt-1 sm:mt-2 text-lg sm:text-xl text-[#4f8c0d] opacity-0">
+      <div
+        id="welcomeMessage"
+        class="mt-1 sm:mt-2 text-lg sm:text-xl text-[#4f8c0d] opacity-0"
+      >
         Добро пожаловать
       </div>
     </div>
@@ -44,7 +47,7 @@
       <div
         id="logoContainer"
         class="absolute -top-10 sm:-top-12 left-1/2 transform -translate-x-1/2"
-        style="background: none; padding: 0;"
+        style="background: none; padding: 0"
       >
         <img
           src="https://orzumed.uz/wp-content/uploads/2024/07/orzu-med-logo-svg.svg"
@@ -53,14 +56,20 @@
         />
       </div>
 
-      <h2 class="text-[#4f8c0d] text-xl sm:text-2xl font-extrabold mb-1 text-center mt-2 sm:mt-2">
+      <h2
+        class="text-[#4f8c0d] text-xl sm:text-2xl font-extrabold mb-1 text-center mt-2 sm:mt-2"
+      >
         Наргиза Шерипова
       </h2>
-      <p class="text-[#4f8c0d] text-center text-xs sm:text-sm mb-3 sm:mb-4 italic font-semibold">
+      <p
+        class="text-[#4f8c0d] text-center text-xs sm:text-sm mb-3 sm:mb-4 italic font-semibold"
+      >
         Директор филиала
       </p>
 
-      <p class="text-center text-gray-700 mb-4 sm:mb-6 italic font-medium text-xs sm:text-base">
+      <p
+        class="text-center text-gray-700 mb-4 sm:mb-6 italic font-medium text-xs sm:text-base"
+      >
         Филиал: Зангиота
       </p>
 
@@ -70,7 +79,9 @@
       >
         4278 3100 2436 1164
       </div>
-      <p class="text-gray-600 text-center text-xs sm:text-sm mt-2 mb-2 font-semibold">
+      <p
+        class="text-gray-600 text-center text-xs sm:text-sm mt-2 mb-2 font-semibold"
+      >
         Действительна до: 08/26
       </p>
 
@@ -82,7 +93,7 @@
       </button>
 
       <button
-        onclick="openApp('intent://#Intent;scheme=kaspi;package=kz.kaspi.mobile;end', 'https://play.google.com/store/apps/details?id=kz.kaspi.mobile')"
+        onclick="copyAndOpenKaspi()"
         class="kaspi-btn bg-[#ee0800] w-full mt-4 sm:mt-5 rounded-xl text-white font-extrabold px-4 py-2 sm:px-6 sm:py-3 hover:bg-[#b10600] transition flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base"
       >
         <img
@@ -119,7 +130,7 @@
         С вами связался оператор Бехруз из филиала Зангиота.<br />
         После оплаты не забудьте отправить чек оператору.<br /><br />
         <strong>Внимание!</strong><br />
-        Для подтверждения оплаты используйте официальный WhatsApp:  
+        Для подтверждения оплаты используйте официальный WhatsApp:
         <a
           href="https://wa.me/+998978784727"
           class="link-underline text-[#4f8c0d] font-bold"
@@ -127,8 +138,10 @@
           rel="noopener noreferrer"
           >+99897 878 47 27</a
         >.<br />
-        Если у вас есть вопросы, звоните по официальному телефону клиники:  
-        <a href="tel:+998901234567" class="link-underline text-[#4f8c0d] font-bold"
+        Если у вас есть вопросы, звоните по официальному телефону клиники:
+        <a
+          href="tel:+998901234567"
+          class="link-underline text-[#4f8c0d] font-bold"
           >+998 55 508 10 10</a
         >.
       </p>
@@ -143,13 +156,58 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script>
+      function copyCardNumberToClipboard() {
+        const cardText = document.getElementById("cardNumber").innerText;
+        return navigator.clipboard.writeText(cardText);
+      }
+
+      function copyAndOpenKaspi() {
+        copyCardNumberToClipboard()
+          .then(() => {
+            // Показать сообщение "Скопировано!"
+            const msg = document.getElementById("copyMsg");
+            msg.classList.remove("hidden");
+            setTimeout(() => {
+              msg.classList.add("hidden");
+            }, 2000);
+
+            // Определяем платформу и открываем Kaspi
+            const userAgent =
+              navigator.userAgent || navigator.vendor || window.opera;
+
+            const kaspiAndroidIntent =
+              "intent://#Intent;scheme=kaspi;package=kz.kaspi.mobile;end";
+            const kaspiAndroidFallback =
+              "https://play.google.com/store/apps/details?id=kz.kaspi.mobile";
+            const kaspiIosLink =
+              "https://apps.apple.com/kz/app/kaspi-kz/id573182018";
+
+            if (/android/i.test(userAgent)) {
+              // Для Android сначала интент, потом fallback
+              window.location.href = kaspiAndroidIntent;
+              setTimeout(() => {
+                window.location.href = kaspiAndroidFallback;
+              }, 1500);
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+              // iOS открываем App Store ссылку
+              window.location.href = kaspiIosLink;
+            } else {
+              // Для других устройств — открываем Google Play
+              window.location.href = kaspiAndroidFallback;
+            }
+          })
+          .catch(() => {
+            alert("Не удалось скопировать номер карты. Попробуйте еще раз.");
+          });
+      }
+
       function copyCardNumber() {
-        const cardText = document.getElementById('cardNumber').innerText;
+        const cardText = document.getElementById("cardNumber").innerText;
         navigator.clipboard.writeText(cardText).then(() => {
-          const msg = document.getElementById('copyMsg');
-          msg.classList.remove('hidden');
+          const msg = document.getElementById("copyMsg");
+          msg.classList.remove("hidden");
           setTimeout(() => {
-            msg.classList.add('hidden');
+            msg.classList.add("hidden");
           }, 2000);
         });
       }
@@ -167,10 +225,10 @@
       }
 
       window.onload = () => {
-        const logoText = document.getElementById('logoText');
-        const welcomeMessage = document.getElementById('welcomeMessage');
-        const animationWrapper = document.getElementById('animationWrapper');
-        const mainContainer = document.getElementById('mainContainer');
+        const logoText = document.getElementById("logoText");
+        const welcomeMessage = document.getElementById("welcomeMessage");
+        const animationWrapper = document.getElementById("animationWrapper");
+        const mainContainer = document.getElementById("mainContainer");
 
         anime
           .timeline()
@@ -179,31 +237,31 @@
             opacity: [0, 1],
             scale: [0.5, 1],
             duration: 700,
-            easing: 'easeOutBack',
+            easing: "easeOutBack",
           })
           .add({
             targets: welcomeMessage,
             opacity: [0, 1],
             translateY: [20, 0],
             duration: 600,
-            easing: 'easeOutQuad',
-            offset: '-=400',
+            easing: "easeOutQuad",
+            offset: "-=400",
           })
           .add({
             targets: animationWrapper,
             opacity: [1, 0],
             duration: 600,
             delay: 800,
-            easing: 'easeInQuad',
+            easing: "easeInQuad",
             complete: () => {
-              animationWrapper.style.display = 'none';
-              mainContainer.classList.remove('hidden');
+              animationWrapper.style.display = "none";
+              mainContainer.classList.remove("hidden");
               anime({
                 targets: mainContainer,
                 opacity: [0, 1],
                 translateY: [20, 0],
                 duration: 600,
-                easing: 'easeOutQuad',
+                easing: "easeOutQuad",
               });
             },
           });
