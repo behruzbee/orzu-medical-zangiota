@@ -17,7 +17,7 @@
   </head>
   <body
     class="flex items-center justify-center min-h-screen relative overflow-x-hidden"
-    style="background-color: #3f6f08;" 
+    style="background-color: #3f6f08;"
   >
     <!-- Анимация появления логотипа -->
     <div
@@ -27,11 +27,11 @@
     >
       <div
         id="logoText"
-        class="text-4xl font-bold text-[#4f8c0d] select-none opacity-0 transform origin-center"
+        class="text-3xl sm:text-4xl font-bold text-[#4f8c0d] select-none opacity-0 transform origin-center"
       >
         Orzu Medical
       </div>
-      <div id="welcomeMessage" class="mt-2 text-xl text-[#4f8c0d] opacity-0">
+      <div id="welcomeMessage" class="mt-1 sm:mt-2 text-lg sm:text-xl text-[#4f8c0d] opacity-0">
         Добро пожаловать
       </div>
     </div>
@@ -39,54 +39,56 @@
     <!-- Основной контейнер с дефолтным Tailwind шрифтом (sans) -->
     <div
       id="mainContainer"
-      class="hidden w-96 max-w-[90vw] bg-white shadow-2xl rounded-3xl p-10 border-t-4 border-[#4f8c0d] relative opacity-0 transform origin-top font-sans"
+      class="hidden my-10 w-11/12 max-w-[90vw] sm:w-96 bg-white shadow-2xl rounded-3xl p-4 sm:p-5 border-t-4 border-[#4f8c0d] relative opacity-0 transform origin-top font-sans"
     >
       <div
         id="logoContainer"
-        class="absolute -top-12 left-1/2 transform -translate-x-1/2 "
+        class="absolute -top-10 sm:-top-12 left-1/2 transform -translate-x-1/2"
         style="background: none; padding: 0;"
       >
         <img
           src="https://orzumed.uz/wp-content/uploads/2024/07/orzu-med-logo-svg.svg"
           alt="Логотип Orzu Medical"
-          class="h-20"
+          class="h-16 sm:h-20"
         />
       </div>
 
-      <h2 class="text-[#4f8c0d] text-2xl font-extrabold mb-1 text-center mt-2">
+      <h2 class="text-[#4f8c0d] text-xl sm:text-2xl font-extrabold mb-1 text-center mt-2 sm:mt-2">
         Наргиза Шерипова
       </h2>
-      <p class="text-[#4f8c0d] text-center text-sm mb-4 italic font-semibold">
+      <p class="text-[#4f8c0d] text-center text-xs sm:text-sm mb-3 sm:mb-4 italic font-semibold">
         Директор филиала
       </p>
 
-      <p class="text-center text-gray-700 mb-6 italic font-medium">Филиал: Зангиота</p>
+      <p class="text-center text-gray-700 mb-4 sm:mb-6 italic font-medium text-xs sm:text-base">
+        Филиал: Зангиота
+      </p>
 
       <div
         id="cardNumber"
-        class="text-center font-mono text-xl bg-gray-100 rounded-lg p-4 border border-gray-400 select-text mt-2"
+        class="text-center font-mono text-lg sm:text-xl bg-gray-100 rounded-lg p-3 sm:p-4 border border-gray-400 select-text mt-2"
       >
         4278 3100 2436 1164
       </div>
-      <p class="text-gray-600 text-center text-sm mt-2 mb-2 font-semibold">
+      <p class="text-gray-600 text-center text-xs sm:text-sm mt-2 mb-2 font-semibold">
         Действительна до: 08/26
       </p>
 
       <button
         onclick="copyCardNumber()"
-        class="copy-btn bg-[#4f8c0d] w-full mt-5 rounded-xl text-white font-extrabold px-6 py-3 hover:bg-[#376b07] transition shadow-lg"
+        class="copy-btn bg-[#4f8c0d] w-full mt-4 sm:mt-5 rounded-xl text-white font-extrabold px-4 py-2 sm:px-6 sm:py-3 hover:bg-[#376b07] transition shadow-lg text-sm sm:text-base"
       >
         Скопировать номер карты
       </button>
 
       <button
         onclick="openApp('intent://#Intent;scheme=kaspi;package=kz.kaspi.mobile;end', 'https://play.google.com/store/apps/details?id=kz.kaspi.mobile')"
-        class="kaspi-btn bg-[#ee0800] w-full mt-5 rounded-xl text-white font-extrabold px-6 py-3 hover:bg-[#b10600] transition flex items-center justify-center gap-3 shadow-lg"
+        class="kaspi-btn bg-[#ee0800] w-full mt-4 sm:mt-5 rounded-xl text-white font-extrabold px-4 py-2 sm:px-6 sm:py-3 hover:bg-[#b10600] transition flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base"
       >
         <img
           src="https://upload.wikimedia.org/wikipedia/ru/thumb/a/aa/Logo_of_Kaspi_bank.png/1024px-Logo_of_Kaspi_bank.png"
           alt="Логотип Kaspi"
-          class="h-7 w-7 object-contain"
+          class="h-5 w-5 sm:h-7 sm:w-7 object-contain"
         />
         Открыть в Kaspi
       </button>
@@ -94,30 +96,30 @@
       <a
         href="https://www.instagram.com/orzumed.uz/"
         target="_blank"
-        class="instagram-btn bg-[#4f8c0d] w-full mt-5 rounded-xl text-white font-extrabold px-6 py-3 hover:bg-[#376b07] transition flex items-center justify-center gap-3 shadow-lg"
+        class="instagram-btn bg-[#4f8c0d] w-full mt-4 sm:mt-5 rounded-xl text-white font-extrabold px-4 py-2 sm:px-6 sm:py-3 hover:bg-[#376b07] transition flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base"
       >
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg"
           alt="Логотип Instagram"
-          class="h-7 w-7 object-contain"
+          class="h-5 w-5 sm:h-7 sm:w-7 object-contain"
         />
         Instagram
       </a>
 
       <a
         href="tel:++998978784727"
-        class="call-operator-btn bg-[#4f8c0d] w-full mt-5 rounded-xl text-white font-extrabold px-6 py-3 hover:bg-[#376b07] transition flex items-center justify-center gap-3 shadow-lg"
+        class="call-operator-btn bg-[#4f8c0d] w-full mt-4 sm:mt-5 rounded-xl text-white font-extrabold px-4 py-2 sm:px-6 sm:py-3 hover:bg-[#376b07] transition flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base"
       >
         📞 Позвонить оператору
       </a>
 
       <p
-        class="mt-8 text-center text-sm text-[#4f8c0d] italic leading-relaxed max-w-[85%] mx-auto font-semibold"
+        class="mt-6 sm:mt-8 text-center text-xs sm:text-sm text-[#4f8c0d] italic leading-relaxed max-w-[90%] mx-auto font-semibold"
       >
         С вами связался оператор Бехруз из филиала Зангиота.<br />
         После оплаты не забудьте отправить чек оператору.<br /><br />
-        <strong>Внимание!</strong> 
-        Для подтверждения оплаты используйте официальный WhatsApp:
+        <strong>Внимание!</strong><br />
+        Для подтверждения оплаты используйте официальный WhatsApp:  
         <a
           href="https://wa.me/+998978784727"
           class="link-underline text-[#4f8c0d] font-bold"
@@ -125,7 +127,7 @@
           rel="noopener noreferrer"
           >+99897 878 47 27</a
         >.<br />
-        Если у вас есть вопросы, звоните по официальному телефону клиники:
+        Если у вас есть вопросы, звоните по официальному телефону клиники:  
         <a href="tel:+998901234567" class="link-underline text-[#4f8c0d] font-bold"
           >+998 55 508 10 10</a
         >.
