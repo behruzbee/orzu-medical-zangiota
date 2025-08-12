@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <title>Карта Orzu Medical</title>
+    <style>
+      /* Кастомные стили для Times New Roman в анимации */
+      #animationWrapper {
+        font-family: 'Times New Roman', Times, serif;
+      }
+    </style>
+  </head>
+  <body class="flex items-center justify-center min-h-screen relative overflow-x-hidden" style="background-color: #e6f6dc;">
+
+    <!-- Анимация появления логотипа -->
+    <div
+      id="animationWrapper"
+      class="fixed inset-0 flex flex-col justify-center items-center bg-white z-50"
+    >
+      <div
+        id="logoText"
+        class="text-4xl font-bold text-[#4f8c0d] select-none opacity-0 transform origin-center"
+      >
+        Orzu Medical
+      </div>
+      <div id="welcomeMessage" class="mt-2 text-xl text-[#4f8c0d] opacity-0">
+        Добро пожаловать
+      </div>
+    </div>
+
+    <!-- Основной контейнер с дефолтным Tailwind шрифтом (sans) -->
+    <div
+      id="mainContainer"
+      class="hidden w-96 max-w-[90vw] bg-white shadow-xl rounded-2xl p-8 border-t-4 border-[#4f8c0d] relative opacity-0 transform origin-top font-sans"
+    >
+      <div
+        id="logoContainer"
+        class="absolute -top-14 left-1/2 transform -translate-x-1/2  rounded-full px-2 py-4"
+      >
+        <img src="https://orzumed.uz/wp-content/uploads/2024/07/orzu-med-logo-svg.svg" alt="Логотип Orzu Medical" />
+      </div>
+
+      <h2 class="text-[#4f8c0d] text-xl font-semibold mb-1 text-center mt-12">
+        Наргиза Шерипова
+      </h2>
+
+      <p class="text-center text-gray-600 mb-4 italic">Филиал: Зангиота</p>
+
+      <div
+        id="cardNumber"
+        class="text-center font-mono text-lg bg-gray-100 rounded-lg p-3 border border-gray-300 select-text mt-2"
+      >
+        4278 3100 2436 1164
+      </div>
+      <p class="text-gray-500 text-center text-sm mt-2 mb-6">Действительна до: 08/26</p>
+
+      <button onclick="copyCardNumber()" class="copy-btn bg-[#4f8c0d] w-full mt-5 rounded-lg text-white font-bold px-4 py-2 hover:bg-[#3a6a09] transition">
+        Скопировать номер карты
+      </button>
+
+      <button
+        onclick="openApp('intent://#Intent;scheme=kaspi;package=kz.kaspi.mobile;end', 'https://play.google.com/store/apps/details?id=kz.kaspi.mobile')"
+        class="kaspi-btn bg-[#ee0800] w-full mt-3 rounded-lg text-white font-bold px-4 py-2 hover:bg-[#b10600] transition flex items-center justify-center gap-2"
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/ru/thumb/a/aa/Logo_of_Kaspi_bank.png/1024px-Logo_of_Kaspi_bank.png"
+          alt="Логотип Kaspi"
+          class="h-6 w-6 object-contain"
+        />
+        Открыть в Kaspi
+      </button>
+
+      <a
+        href="https://www.instagram.com/orzu_medical/"
+        target="_blank"
+        class="instagram-btn bg-[#4f8c0d] w-full mt-3 rounded-lg text-white font-bold px-4 py-2 hover:bg-[#3a6a09] transition flex items-center justify-center gap-2"
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg"
+          alt="Логотип Instagram"
+          class="h-6 w-6 object-contain"
+        />
+        Instagram
+      </a>
+
+      <p id="copyMsg" class="text-[#4f8c0d] mt-4 text-center text-sm hidden">Скопировано!</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+      function copyCardNumber() {
+        const cardText = document.getElementById('cardNumber').innerText;
+        navigator.clipboard.writeText(cardText).then(() => {
+          const msg = document.getElementById('copyMsg');
+          msg.classList.remove('hidden');
+          setTimeout(() => {
+            msg.classList.add('hidden');
+          }, 2000);
+        });
+      }
+
+      function openApp(intentUrl, fallbackUrl) {
+        const isAndroid = /Android/i.test(navigator.userAgent);
+        if (isAndroid) {
+          window.location.href = intentUrl;
+          setTimeout(() => {
+            window.location.href = fallbackUrl;
+          }, 2000);
+        } else {
+          window.location.href = fallbackUrl;
+        }
+      }
+
+      window.onload = () => {
+        const logoText = document.getElementById('logoText');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const animationWrapper = document.getElementById('animationWrapper');
+        const mainContainer = document.getElementById('mainContainer');
+
+        anime
+          .timeline()
+          .add({
+            targets: logoText,
+            opacity: [0, 1],
+            scale: [0.5, 1],
+            duration: 700,
+            easing: 'easeOutBack',
+          })
+          .add({
+            targets: welcomeMessage,
+            opacity: [0, 1],
+            translateY: [20, 0],
+            duration: 600,
+            easing: 'easeOutQuad',
+            offset: '-=400',
+          })
+          .add({
+            targets: animationWrapper,
+            opacity: [1, 0],
+            duration: 600,
+            delay: 800,
+            easing: 'easeInQuad',
+            complete: () => {
+              animationWrapper.style.display = 'none';
+              mainContainer.classList.remove('hidden');
+              anime({
+                targets: mainContainer,
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 600,
+                easing: 'easeOutQuad',
+              });
+            },
+          });
+      };
+    </script>
+  </body>
+</html>
